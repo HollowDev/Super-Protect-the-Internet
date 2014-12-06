@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="code\GameMain.cpp" />
+    <ClCompile Include="code\TestState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="code\GameCamera.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="code\Player.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="code\GameDefines.h" />
+    <ClInclude Include="code\TestState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="code\GameCamera.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="code\Player.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="code\GameObjectDefines.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="States">
+      <UniqueIdentifier>{06fa4533-a985-4903-9608-57e858502c8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{9f5b6d3c-3706-4802-8615-85d04fa42adc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{0b322b99-b55f-4fc3-8458-2a84766d3261}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

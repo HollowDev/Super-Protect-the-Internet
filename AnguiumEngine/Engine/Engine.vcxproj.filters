@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Core">
+      <UniqueIdentifier>{3730fa9a-2c81-4623-9902-0adf0083e852}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Foundation">
+      <UniqueIdentifier>{f80ef7d6-1c2f-4dec-839d-5b536fb6b7fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{8c2c9e32-f354-42a3-b6df-2417aafa4c34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Foundation\Renderer">
+      <UniqueIdentifier>{0fbeb7e8-9a3c-4261-94f3-fdc6a704b584}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Foundation\Assets">
+      <UniqueIdentifier>{0874cabf-05e8-4740-a9bd-da783c981ffa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Foundation\App Management">
+      <UniqueIdentifier>{241fe64f-fe69-4296-ab9f-84ac0becd165}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="code\AnguiumMath.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="code\AnguiumUtil.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="code\AnguiumEngine.cpp" />
+    <ClCompile Include="code\D3D9Handler.cpp">
+      <Filter>Foundation\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="code\Renderer.cpp">
+      <Filter>Foundation\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="code\RenderObject.cpp">
+      <Filter>Foundation\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="code\Quad.cpp">
+      <Filter>Foundation\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="code\VertexBuffer.cpp">
+      <Filter>Foundation\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="code\IndexBuffer.cpp">
+      <Filter>Foundation\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="code\Camera.cpp">
+      <Filter>Foundation\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="code\Transform.cpp">
+      <Filter>Foundation</Filter>
+    </ClCompile>
+    <ClCompile Include="code\AssetPool.cpp">
+      <Filter>Foundation\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="code\GameControl_PC.cpp">
+      <Filter>Foundation\App Management</Filter>
+    </ClCompile>
+    <ClCompile Include="code\StateSystem.cpp">
+      <Filter>Foundation\App Management</Filter>
+    </ClCompile>
+    <ClCompile Include="code\Timer.cpp">
+      <Filter>Foundation\App Management</Filter>
+    </ClCompile>
+    <ClCompile Include="code\GameState.cpp">
+      <Filter>Foundation\App Management</Filter>
+    </ClCompile>
+    <ClCompile Include="code\GameObject.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="code\GameObjectFactory.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="code\GameObjectManager.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="code\GameObjectTypeInfo.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="code\AnguiumMath.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="code\AnguiumUtil.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="code\AnguiumEngine.h" />
+    <ClInclude Include="code\D3D9Handler.h">
+      <Filter>Foundation\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="code\Renderer.h">
+      <Filter>Foundation\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="code\RenderObject.h">
+      <Filter>Foundation\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="code\Quad.h">
+      <Filter>Foundation\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="code\Vertex.h">
+      <Filter>Foundation\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="code\VertexBuffer.h">
+      <Filter>Foundation\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="code\IndexBuffer.h">
+      <Filter>Foundation\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="code\Camera.h">
+      <Filter>Foundation\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="code\Transform.h">
+      <Filter>Foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="code\AssetPool.h">
+      <Filter>Foundation\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="code\GameControl.h">
+      <Filter>Foundation\App Management</Filter>
+    </ClInclude>
+    <ClInclude Include="code\GameState.h">
+      <Filter>Foundation\App Management</Filter>
+    </ClInclude>
+    <ClInclude Include="code\StateSystem.h">
+      <Filter>Foundation\App Management</Filter>
+    </ClInclude>
+    <ClInclude Include="code\Timer.h">
+      <Filter>Foundation\App Management</Filter>
+    </ClInclude>
+    <ClInclude Include="code\GameObject.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="code\GameObjectFactory.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="code\GameObjectManager.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="code\GameObjectTypeInfo.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
