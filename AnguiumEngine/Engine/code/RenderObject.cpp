@@ -37,7 +37,7 @@ void RenderObject::Render( ShaderPass* _effect )
 	ASSERT(device); // make sure it exists!
 
 	device->SetVertexDeclaration( decl );
-	device->SetStreamSource( 0, vbuffer, 0, sizeof(Vertex_PosTex) );
+	device->SetStreamSource( 0, vbuffer, 0, quad->GetVertexBuffer()->GetTypeLength() );
 	device->SetIndices( ibuffer );
 	device->DrawIndexedPrimitive( D3DPT_TRIANGLELIST, 0, 0, 4, 0, 2 );
 }

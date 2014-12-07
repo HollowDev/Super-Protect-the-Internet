@@ -95,13 +95,16 @@
     <ClCompile Include="code\Camera.cpp" />
     <ClCompile Include="code\AssetPool.cpp" />
     <ClCompile Include="code\RenderDevice_DX9.cpp" />
+    <ClCompile Include="code\RenderPrimitive.cpp" />
     <ClCompile Include="code\ShaderPass_DX9.cpp" />
     <ClCompile Include="code\StateSystem.cpp" />
     <ClCompile Include="code\Timer.cpp" />
     <ClCompile Include="code\Quad.cpp" />
+    <ClCompile Include="code\Vertex.cpp" />
     <ClCompile Include="code\VertexBuffer.cpp" />
     <ClCompile Include="code\RenderObject.cpp" />
     <ClCompile Include="code\Renderer.cpp" />
+    <ClCompile Include="code\VertexDesc.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code\AnguiumEngine.h" />
@@ -117,6 +120,7 @@
     <ClInclude Include="code\AssetPool.h" />
     <ClInclude Include="code\GameState.h" />
     <ClInclude Include="code\RenderDevice.h" />
+    <ClInclude Include="code\RenderPrimitive.h" />
     <ClInclude Include="code\ShaderPass.h" />
     <ClInclude Include="code\StateSystem.h" />
     <ClInclude Include="code\Timer.h" />
@@ -125,6 +129,7 @@
     <ClInclude Include="code\VertexBuffer.h" />
     <ClInclude Include="code\RenderObject.h" />
     <ClInclude Include="code\Renderer.h" />
+    <ClInclude Include="code\VertexDesc.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

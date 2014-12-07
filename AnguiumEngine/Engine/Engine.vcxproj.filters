@@ -82,6 +82,15 @@
     <ClCompile Include="code\RenderDevice_DX9.cpp">
       <Filter>Foundation\Renderer\Types</Filter>
     </ClCompile>
+    <ClCompile Include="code\RenderPrimitive.cpp">
+      <Filter>Foundation\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="code\Vertex.cpp">
+      <Filter>Foundation\Renderer\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="code\VertexDesc.cpp">
+      <Filter>Foundation\Renderer\Types</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code\AnguiumMath.h">
@@ -98,9 +107,6 @@
       <Filter>Foundation\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="code\Quad.h">
-      <Filter>Foundation\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="code\Vertex.h">
       <Filter>Foundation\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="code\VertexBuffer.h">
@@ -143,6 +149,15 @@
       <Filter>Foundation\Renderer\Types</Filter>
     </ClInclude>
     <ClInclude Include="code\RenderDevice.h">
+      <Filter>Foundation\Renderer\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="code\RenderPrimitive.h">
+      <Filter>Foundation\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="code\Vertex.h">
+      <Filter>Foundation\Renderer\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="code\VertexDesc.h">
       <Filter>Foundation\Renderer\Types</Filter>
     </ClInclude>
   </ItemGroup>
