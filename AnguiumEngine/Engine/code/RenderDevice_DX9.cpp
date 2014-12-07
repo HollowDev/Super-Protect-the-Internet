@@ -71,6 +71,10 @@ void RenderDevice::Release( void )
 void RenderDevice::BeginScene( void )
 {
 	m_Device->BeginScene();
+	
+	m_Device->SetRenderState( D3DRENDERSTATETYPE::D3DRS_ALPHABLENDENABLE, TRUE );
+	m_Device->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA );
+	m_Device->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA );
 }
 
 void RenderDevice::EndScene( void )

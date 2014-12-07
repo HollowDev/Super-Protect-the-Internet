@@ -36,6 +36,9 @@ struct VertexPos3Color
 
 	f32 x, y, z;
 	f32 r, g, b, a;
+	
+	VertexPos3Color( void ) : x(0.0f), y(0.0f), z(0.0f), r(0.0f), g(0.0f), b(0.0f), a(0.0f) {}
+	VertexPos3Color( f32 _x, f32 _y, f32 _z, f32 _r, f32 _g, f32 _b, f32 _a ) : x(_x), y(_y), z(_z), r(_r), g(_g), b(_b), a(_a) {}
 };
 struct VertexPos4Color
 {

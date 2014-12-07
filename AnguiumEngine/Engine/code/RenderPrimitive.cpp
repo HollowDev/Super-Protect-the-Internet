@@ -8,11 +8,10 @@
 #include "RenderPrimitive.h"
 
 
-//RenderPrimitive::RenderPrimitive( VertexType _vertexType ) :
-//	m_VertexBuffer( _vertexType )
-//{
-//}
-//
-//RenderPrimitive::~RenderPrimitive( void )
-//{
-//}
+RenderPrimitive::RenderPrimitive( void )
+{
+}
+
+RenderPrimitive::~RenderPrimitive( void )
+{
+}

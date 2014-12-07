@@ -29,8 +29,6 @@ Quad::Quad( unsigned int _width, unsigned int _height )
 		// FAILED! 
 		int x = 0;
 	}
-
-	int x = 0;
 }
 
 Quad::~Quad( void )

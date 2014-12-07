@@ -16,6 +16,7 @@ namespace AnguiumEngine
 		D3DCOLOR			m_ClearColor;
 
 		ShaderPass m_Shader;
+		ShaderPass m_BasicShader;
 	
 		bool m_UpdateLists;
 		vector< RenderObject* > m_SortedObjects;

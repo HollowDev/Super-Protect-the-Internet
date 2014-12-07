@@ -11,19 +11,19 @@
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
 
-//namespace AnguiumEngine
-//{
-//	class RenderPrimitive
-//	{
-//		VertexBuffer m_VertexBuffer;
-//		IndexBuffer m_IndexBuffer;
-//	public:
-//		RenderPrimitive( VertexType _vertexType );
-//		~RenderPrimitive( void );
-//	
-//		VertexBuffer* GetVertexBuffer( void )	{ return &m_VertexBuffer;	}
-//		IndexBuffer* GetIndexBuffer( void )		{ return &m_IndexBuffer;	}
-//	};
-//}
+namespace AnguiumEngine
+{
+	class RenderPrimitive
+	{
+		VertexBuffer m_VertexBuffer;
+		IndexBuffer m_IndexBuffer;
+	public:
+		RenderPrimitive( void );
+		~RenderPrimitive( void );
+	
+		VertexBuffer* GetVertexBuffer( void )	{ return &m_VertexBuffer;	}
+		IndexBuffer* GetIndexBuffer( void )		{ return &m_IndexBuffer;	}
+	};
+}
 
 #endif
