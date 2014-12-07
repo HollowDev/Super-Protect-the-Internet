@@ -24,20 +24,6 @@ void RenderObject::Render( ShaderPass* _effect )
 	_effect->SetMatrix( "gWorld", &m_World );
 	_effect->SetTexture( "gTexture", texture );
 	_effect->Commit();
-
-	IDirect3DVertexBuffer9* vbuffer		= quad->GetVertexBuffer()->GetBuffer();
-	IDirect3DVertexDeclaration9* decl	= quad->GetVertexBuffer()->GetDecl();
-	IDirect3DIndexBuffer9* ibuffer		= quad->GetIndexBuffer()->GetBuffer();
-
-	u32 numVerts	= quad->GetVertexBuffer()->GetNumVerts();
-	u32 numIndices = quad->GetIndexBuffer()->GetNumIndices();
-
 	
-	IDirect3DDevice9* device = reinterpret_cast<IDirect3DDevice9*>(g_RenderDevice->GetDevice());
-	ASSERT(device); // make sure it exists!
-
-	device->SetVertexDeclaration( decl );
-	device->SetStreamSource( 0, vbuffer, 0, quad->GetVertexBuffer()->GetTypeLength() );
-	device->SetIndices( ibuffer );
-	device->DrawIndexedPrimitive( D3DPT_TRIANGLELIST, 0, 0, 4, 0, 2 );
+	g_RenderDevice->Render( _effect, quad->GetPrimitive() );
 }

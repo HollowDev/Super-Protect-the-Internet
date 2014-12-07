@@ -54,19 +54,23 @@ void RenderDevice::Release( void )
 	SAFE_RELEASE( m_Device );
 }
 
-//void RenderDevice::Render( const ShaderPass* _shader, RenderPrimitive* _primitive )
-//{
-//	IDirect3DVertexBuffer9* vbuffer		= _primitive->GetVertexBuffer()->GetBuffer();
-//	IDirect3DVertexDeclaration9* decl	= _primitive->GetVertexBuffer()->GetDecl();
-//	IDirect3DIndexBuffer9* ibuffer		= _primitive->GetIndexBuffer()->GetBuffer();
-//
-//	unsigned int numVerts	= _primitive->GetVertexBuffer()->GetNumVerts();
-//	unsigned int numIndices = _primitive->GetIndexBuffer()->GetNumIndices();
-//
-//	m_Device->SetVertexDeclaration( decl );
-//	m_Device->SetStreamSource( 0, vbuffer, 0, _primitive->GetVertexBuffer()->GetStride() );
-//	m_Device->DrawPrimitive( D3DPT_TRIANGLELIST, 0, numIndices/3 );
-//}
+void RenderDevice::Render( const ShaderPass* _shader, RenderPrimitive* _primitive )
+{
+	IDirect3DVertexBuffer9* vbuffer		= _primitive->GetVertexBuffer()->GetBuffer();
+	IDirect3DVertexDeclaration9* decl	= _primitive->GetVertexBuffer()->GetDecl();
+	IDirect3DIndexBuffer9* ibuffer		= _primitive->GetIndexBuffer()->GetBuffer();
+
+	unsigned int numVerts	= _primitive->GetVertexBuffer()->GetNumVerts();
+	unsigned int numIndices = _primitive->GetIndexBuffer()->GetNumIndices();
+	D3DPRIMITIVETYPE primType = (D3DPRIMITIVETYPE)_primitive->GetPrimitiveType();
+
+	if( primType == D3DPT_TRIANGLELIST ) numIndices /= 3;
+
+	m_Device->SetVertexDeclaration( decl );
+	m_Device->SetStreamSource( 0, vbuffer, 0, _primitive->GetVertexBuffer()->GetTypeLength() );
+	m_Device->SetIndices( ibuffer );
+	m_Device->DrawIndexedPrimitive( primType, 0, 0, numVerts, 0, numIndices );
+}
 
 void RenderDevice::BeginScene( void )
 {

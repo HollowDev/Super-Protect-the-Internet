@@ -6,8 +6,9 @@ Quad::Quad( unsigned int _width, unsigned int _height )
 	m_Height	= _height;
 
 	// Initialize the buffers
-	m_VertexBuffer = new VertexBuffer();
-	m_IndexBuffer = new IndexBuffer();
+	m_Primitive = new RenderPrimitive();
+	VertexBuffer* m_VertexBuffer = m_Primitive->GetVertexBuffer();
+	IndexBuffer* m_IndexBuffer = m_Primitive->GetIndexBuffer();
 	
 	// Construct the vertex buffer and index buffer
 	VertexPos3Tex* verts = m_VertexBuffer->Lock<VertexPos3Tex>( 4 );
@@ -29,10 +30,11 @@ Quad::Quad( unsigned int _width, unsigned int _height )
 		// FAILED! 
 		int x = 0;
 	}
+
+	m_Primitive->SetPrimitiveType( (u32)D3DPT_TRIANGLELIST );
 }
 
 Quad::~Quad( void )
 {
-	SAFE_DELETE( m_VertexBuffer );
-	SAFE_DELETE( m_IndexBuffer );
+	SAFE_DELETE( m_Primitive );
 }

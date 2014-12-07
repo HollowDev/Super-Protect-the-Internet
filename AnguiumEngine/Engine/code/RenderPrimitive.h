@@ -17,12 +17,21 @@ namespace AnguiumEngine
 	{
 		VertexBuffer m_VertexBuffer;
 		IndexBuffer m_IndexBuffer;
+
+		u32 m_PrimitiveType;
+	
 	public:
 		RenderPrimitive( void );
 		~RenderPrimitive( void );
 	
-		VertexBuffer* GetVertexBuffer( void )	{ return &m_VertexBuffer;	}
-		IndexBuffer* GetIndexBuffer( void )		{ return &m_IndexBuffer;	}
+		// Accessors
+		inline VertexBuffer* GetVertexBuffer( void )	{ return &m_VertexBuffer;	}
+		inline IndexBuffer* GetIndexBuffer( void )		{ return &m_IndexBuffer;	}
+		inline u32 GetPrimitiveType( void )				{ return m_PrimitiveType;	}
+
+		// Mutators
+		inline void SetPrimitiveType( u32 _type ) { m_PrimitiveType = _type; }
+
 	};
 }
 

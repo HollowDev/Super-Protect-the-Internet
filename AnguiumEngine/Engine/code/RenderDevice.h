@@ -3,6 +3,7 @@
 #define _RENDER_DEVICE_H_
 
 #include "ShaderPass.h"
+#include "RenderPrimitive.h"
 
 namespace AnguiumEngine
 {
@@ -35,7 +36,7 @@ namespace AnguiumEngine
 		bool Initialize( void );
 		void Release( void );
 
-		//void Render( const ShaderPass* _shader, RenderPrimitive* _primitive );
+		void Render( const ShaderPass* _shader, RenderPrimitive* _primitive );
 	
 		void BeginScene( void );
 		void EndScene( void );
