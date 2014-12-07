@@ -12,7 +12,6 @@ namespace AnguiumEngine
 {
 	class Renderer
 	{
-		IDirect3DDevice9*	m_D3D9Device;
 		Camera*				m_Camera;
 		D3DCOLOR			m_ClearColor;
 
@@ -33,7 +32,7 @@ namespace AnguiumEngine
 		Renderer( void );
 		~Renderer( void );
 	
-		void Launch( IDirect3DDevice9* _d3d9device, const char* _effectFilePath );
+		void Launch( const char* _effectFilePath );
 		void Render( void );
 	
 		void RegisterRenderObject( RenderObject* _renderObject );

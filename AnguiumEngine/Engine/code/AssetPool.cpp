@@ -3,7 +3,9 @@
 TextureAsset::TextureAsset( const wchar_t* _textureFilePath )
 {
 	// Create the texture
-	D3DXCreateTextureFromFile( g_D3D9Handler->m_Device, _textureFilePath, &m_Texture );
+	IDirect3DDevice9* device = reinterpret_cast<IDirect3DDevice9*>(g_RenderDevice->GetDevice());
+	ASSERT(device); // make sure it exists!
+	D3DXCreateTextureFromFile( device, _textureFilePath, &m_Texture );
 	
 	// Get surface description (to find Width/Height of the texture)
 	D3DSURFACE_DESC d3dSurfDesc;

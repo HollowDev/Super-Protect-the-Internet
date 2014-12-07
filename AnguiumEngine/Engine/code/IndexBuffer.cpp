@@ -46,7 +46,10 @@ bool IndexBuffer::Unlock( void )
 	if( !m_Indices || m_NumIndices == 0 ) return false;
 
 	// Create the index buffer
-	HRESULT hr = g_D3D9Handler->m_Device->CreateIndexBuffer( sizeof(u32) * m_NumIndices, 0, D3DFMT_INDEX32, D3DPOOL_MANAGED, &m_Buffer, 0 );
+	IDirect3DDevice9* device = reinterpret_cast<IDirect3DDevice9*>(g_RenderDevice->GetDevice());
+	ASSERT(device); // make sure it exists!
+
+	HRESULT hr = device->CreateIndexBuffer( sizeof(u32) * m_NumIndices, 0, D3DFMT_INDEX32, D3DPOOL_MANAGED, &m_Buffer, 0 );
 	if( FAILED( hr ) ) return false;
 	
 	void *vram = 0;

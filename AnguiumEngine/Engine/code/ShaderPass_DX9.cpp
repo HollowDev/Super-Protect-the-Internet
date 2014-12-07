@@ -14,8 +14,8 @@ ShaderPass::~ShaderPass( void )
 
 bool ShaderPass::Initialize( const char* _fileName )
 {
-	IDirect3DDevice9* device = g_D3D9Handler->m_Device;
-	assert(device); // make sure it exists!
+	IDirect3DDevice9* device = reinterpret_cast<IDirect3DDevice9*>(g_RenderDevice->GetDevice());
+	ASSERT(device); // make sure it exists!
 	
 	u32 fileNameLength = strlen(_fileName);
 	wchar_t* wFileName = new wchar_t[fileNameLength+1];

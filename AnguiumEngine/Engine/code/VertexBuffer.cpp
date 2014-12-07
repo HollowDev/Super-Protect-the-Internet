@@ -17,7 +17,10 @@ VertexBuffer::VertexBuffer( void )
 		{ 0, 12, D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
 		D3DDECL_END(),
 	};
-	g_D3D9Handler->m_Device->CreateVertexDeclaration( decl, &m_Decl );
+
+	IDirect3DDevice9* device = reinterpret_cast<IDirect3DDevice9*>(g_RenderDevice->GetDevice());
+	ASSERT(device); // make sure it exists!
+	device->CreateVertexDeclaration( decl, &m_Decl );
 }
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 Summary: Destructor
@@ -56,7 +59,10 @@ bool VertexBuffer::Unlock( void )
 	if( !m_Verts || m_NumVerts == 0 ) return false;
 
 	// Create vertex buffer
-	HRESULT hr = g_D3D9Handler->m_Device->CreateVertexBuffer( sizeof(Vertex_PosTex) * m_NumVerts, 0, 0, D3DPOOL_MANAGED, &m_Buffer, NULL );
+	IDirect3DDevice9* device = reinterpret_cast<IDirect3DDevice9*>(g_RenderDevice->GetDevice());
+	ASSERT(device); // make sure it exists!
+
+	HRESULT hr = device->CreateVertexBuffer( sizeof(Vertex_PosTex) * m_NumVerts, 0, 0, D3DPOOL_MANAGED, &m_Buffer, NULL );
 	if( FAILED( hr ) ) return false;
 
 	void *vram = 0;

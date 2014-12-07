@@ -19,7 +19,7 @@ namespace AnguiumEngine
 		RenderObject( void );
 		~RenderObject( void );
 	
-		void Render( IDirect3DDevice9* _device, ShaderPass* _effect );
+		void Render( ShaderPass* _effect );
 	
 		// Accessors
 		inline u32 GetTexID( void )				{ return m_TexID;		}

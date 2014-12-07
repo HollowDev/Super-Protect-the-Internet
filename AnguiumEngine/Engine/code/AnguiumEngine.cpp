@@ -11,8 +11,8 @@ Desc: Global controls and object
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 GameObjectFactory*	g_ObjectFactory = nullptr;
 GameObjectManager*	g_ObjectManager = nullptr;
+RenderDevice*		g_RenderDevice	= nullptr;
 GameControl*		g_GameControl	= nullptr;
-D3D9Handler*		g_D3D9Handler	= nullptr;
 AssetPool*			g_AssetPool		= nullptr;
 Renderer*			g_Renderer		= nullptr;
 Timer*				g_Timer			= nullptr;
@@ -26,16 +26,16 @@ void AnguiumEngineLaunch( const wchar_t* _title, u32 _width, u32 _height, GameSt
 {
 	g_ObjectFactory = new GameObjectFactory();
 	g_ObjectManager = new GameObjectManager();
+	g_RenderDevice	= new RenderDevice();
 	g_GameControl	= new GameControl();
-	g_D3D9Handler	= new D3D9Handler();
 	g_AssetPool		= new AssetPool();
 	g_Renderer		= new Renderer();
 	g_Timer			= new Timer();
 	
 	g_ObjectFactory->Launch(); // launch here, not in constructor
 	g_GameControl->Initialize( _title, _width, _height, _startState );
-	g_D3D9Handler->Launch( g_GameControl->GetHWND() );
-	g_Renderer->Launch( g_D3D9Handler->m_Device, "assets/effects/textured.fx" );
+	g_RenderDevice->Initialize();
+	g_Renderer->Launch( "assets/effects/textured.fx" );
 }
 
 void AnguiumEngineRun( void )
@@ -49,8 +49,8 @@ void AnguiumEngineCleanup( void )
 
 	SAFE_DELETE( g_ObjectFactory );
 	SAFE_DELETE( g_ObjectManager );
+	SAFE_DELETE( g_RenderDevice );
 	SAFE_DELETE( g_GameControl );
-	SAFE_DELETE( g_D3D9Handler );
 	SAFE_DELETE( g_AssetPool );
 	SAFE_DELETE( g_Renderer );
 	SAFE_DELETE( g_Timer );

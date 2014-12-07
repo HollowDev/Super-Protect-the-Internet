@@ -49,7 +49,7 @@ using std::vector;
 #include "GameObjectTypeInfo.h"
 #include "GameObjectFactory.h"
 #include "GameObjectManager.h"
-#include "D3D9Handler.h"
+#include "RenderDevice.h"
 #include "ShaderPass.h"
 #include "Renderer.h"
 #include "Vertex.h"
@@ -70,13 +70,13 @@ using namespace AnguiumUtil;
 using namespace AnguiumEngine;
 
 // Global variables
-extern GameObjectFactory* g_ObjectFactory;
-extern GameObjectManager* g_ObjectManager;
-extern GameControl* g_GameControl;
-extern D3D9Handler*	g_D3D9Handler;
-extern AssetPool*	g_AssetPool;
-extern Renderer*	g_Renderer;
-extern Timer*		g_Timer;
+extern GameObjectFactory*	g_ObjectFactory;
+extern GameObjectManager*	g_ObjectManager;
+extern RenderDevice*		g_RenderDevice;
+extern GameControl*			g_GameControl;
+extern AssetPool*			g_AssetPool;
+extern Renderer*			g_Renderer;
+extern Timer*				g_Timer;
 
 extern f32 g_AspectRatio;
 extern u32 g_BackBufferWidth;

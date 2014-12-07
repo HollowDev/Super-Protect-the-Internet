@@ -13,18 +13,13 @@ RenderObject::~RenderObject( void )
 
 }
 
-void RenderObject::Render( IDirect3DDevice9* _device, ShaderPass* _effect )
+void RenderObject::Render( ShaderPass* _effect )
 {
 	// Get the mesh from the object pool
 	// Get the texture from the object pool
 	// Draw the mother flubing object, BEACH!
 	Quad* quad = g_AssetPool->GetTextureAsset( m_TexID )->m_Quad;
 	LPDIRECT3DTEXTURE9 texture = g_AssetPool->GetTextureAsset( m_TexID )->m_Texture;
-	
-	if( !quad || !texture )
-	{
-		int x = 0;
-	}
 	
 	_effect->SetMatrix( "gWorld", &m_World );
 	_effect->SetTexture( "gTexture", texture );
@@ -37,8 +32,12 @@ void RenderObject::Render( IDirect3DDevice9* _device, ShaderPass* _effect )
 	u32 numVerts	= quad->GetVertexBuffer()->GetNumVerts();
 	u32 numIndices = quad->GetIndexBuffer()->GetNumIndices();
 
-	_device->SetVertexDeclaration( decl );
-	_device->SetStreamSource( 0, vbuffer, 0, sizeof(Vertex_PosTex) );
-	_device->SetIndices( ibuffer );
-	_device->DrawIndexedPrimitive( D3DPT_TRIANGLELIST, 0, 0, 4, 0, 2 );
+	
+	IDirect3DDevice9* device = reinterpret_cast<IDirect3DDevice9*>(g_RenderDevice->GetDevice());
+	ASSERT(device); // make sure it exists!
+
+	device->SetVertexDeclaration( decl );
+	device->SetStreamSource( 0, vbuffer, 0, sizeof(Vertex_PosTex) );
+	device->SetIndices( ibuffer );
+	device->DrawIndexedPrimitive( D3DPT_TRIANGLELIST, 0, 0, 4, 0, 2 );
 }

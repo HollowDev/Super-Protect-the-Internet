@@ -17,9 +17,8 @@ Renderer::~Renderer( void )
 
 }
 	
-void Renderer::Launch( IDirect3DDevice9* _d3d9device, const char* _effectFilePath )
+void Renderer::Launch( const char* _effectFilePath )
 {
-	m_D3D9Device = _d3d9device;
 	m_Shader.Initialize( _effectFilePath );
 }
 
@@ -28,13 +27,17 @@ void Renderer::Render( void )
 	if( m_UpdateLists )
 		ProcessChanges();
 
-	m_D3D9Device->Clear( 0, 0, D3DCLEAR_ZBUFFER | D3DCLEAR_TARGET, m_ClearColor, 1.0f, 0 );
-	m_D3D9Device->BeginScene();
+	
+	IDirect3DDevice9* device = reinterpret_cast<IDirect3DDevice9*>(g_RenderDevice->GetDevice());
+	assert(device); // make sure it exists!
+
+	g_RenderDevice->Clear( &Color( 0.1f, 0.1f, 0.2f, 1.0f ), 1.0f, D3DCLEAR_ZBUFFER | D3DCLEAR_TARGET );
+	g_RenderDevice->BeginScene();
 	{
-		// setup the alpha blending
-		m_D3D9Device->SetRenderState( D3DRENDERSTATETYPE::D3DRS_ALPHABLENDENABLE, TRUE );
-		m_D3D9Device->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA );
-		m_D3D9Device->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA );
+		//// setup the alpha blending
+		//m_D3D9Device->SetRenderState( D3DRENDERSTATETYPE::D3DRS_ALPHABLENDENABLE, TRUE );
+		//m_D3D9Device->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA );
+		//m_D3D9Device->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA );
 		
 
 		// Render the sorted objects using the shader
@@ -57,16 +60,15 @@ void Renderer::Render( void )
 						m_Shader.SetMatrix( "gViewProjection", &m_Camera->GetViewProj() );
 
 
-					(*iter)->Render( m_D3D9Device, &m_Shader );
+					(*iter)->Render( &m_Shader );
 				}
 			}
 			m_Shader.EndPass();
 		}
 		m_Shader.End();
 	}
-
-	m_D3D9Device->EndScene();
-	m_D3D9Device->Present( 0, 0, 0, 0 );
+	g_RenderDevice->EndScene();
+	g_RenderDevice->Present();
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
