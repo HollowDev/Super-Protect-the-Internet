@@ -20,16 +20,16 @@ GameObjectFactory::~GameObjectFactory( void )
 
 void GameObjectFactory::Launch( void )
 {
-	for( unsigned int i = 0; i < 256; ++i )
+	for( u32 i = 0; i < MAX_OBJECT_TYPE_INFO; ++i )
 	{
 		// Check if the object has info
 		GameObjectTypeInfo* info = g_GameObjectInfo[i];
 		if( !info ) continue;
 
 		// Initialize an array of the requested size
-		unsigned int allocSize = info->GetMaxCount();
+		u32 allocSize = info->GetMaxCount();
 		m_Pool[i] = new GameObject*[allocSize];
-		for( unsigned int x = 0; x < allocSize; ++x )
+		for( u32 x = 0; x < allocSize; ++x )
 		{
 			// Create the object from the info and plug it into the array
 			m_Pool[i][x] = info->Create();
@@ -41,15 +41,15 @@ void GameObjectFactory::Launch( void )
 
 void GameObjectFactory::Release( void )
 {
-	for( unsigned int i = 0; i < 256; ++i )
+	for( u32 i = 0; i < MAX_OBJECT_TYPE_INFO; ++i )
 	{
 		// Check if the object has info
 		GameObjectTypeInfo* info = g_GameObjectInfo[i];
 		if( !info || !m_Pool[i] ) continue;
 
 		// Grab the size of the allocated array
-		unsigned int allocSize = info->GetMaxCount();
-		for( unsigned int x = 0; x < allocSize; ++x )
+		u32 allocSize = info->GetMaxCount();
+		for( u32 x = 0; x < allocSize; ++x )
 		{
 			// Delete each game object from the factory
 			m_Pool[i][x]->Release();
@@ -69,14 +69,14 @@ Params:
 Return:
 	_object - the object that was created
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-GameObject* GameObjectFactory::Alloc( unsigned int _type )
+GameObject* GameObjectFactory::Alloc( u32 _type )
 {
 	// If the open list is empty there is nothing we can do
-	queue<unsigned int>& openList = m_OpenList[_type];
-	/* ASSERT( openList.empty(), "GameObjectFactory::Alloc -- no open slots for _type" ); */
+	queue<u32>& openList = m_OpenList[_type];
+	ASSERT( !openList.empty() && "<GameObjectFactory::Alloc> :: no open slots for current type!" );
 
 	// Grab the first index in the open list
-	unsigned int index = openList.front();
+	u32 index = openList.front();
 	openList.pop();
 	
 	// return the object to the user
@@ -84,21 +84,18 @@ GameObject* GameObjectFactory::Alloc( unsigned int _type )
 }
 
 	
-void GameObjectFactory::Free( GameObject* _object, unsigned int _type )
+void GameObjectFactory::Free( GameObject* _object, u32 _type )
 {
 	GameObjectTypeInfo* info = g_GameObjectInfo[_type];
-	/* ASSERT( info ) */
+	ASSERT( info );
 
 	// Grab the information for this object
-	unsigned int allocSize = info->GetMaxCount();
-	unsigned int sizeOf = info->GetSizeOf();
+	u32 allocSize = info->GetMaxCount();
+	u32 sizeOf = info->GetSizeOf();
 
 	// Pointer math to determine the index of the object
-	unsigned int loc = ((int)_object - (int)&(m_Pool[_type])[0]) / sizeOf;
-	if( loc < 0 || loc > allocSize )
-	{
-		// FAILED
-	}
+	u32 loc = ((s32)_object - (s32)&(m_Pool[_type])[0]) / sizeOf;
+	ASSERT( !( loc < 0 || loc > allocSize ) );
 	
 	// Push it back into the open list!
 	m_OpenList[_type].push(loc);

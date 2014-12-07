@@ -54,23 +54,6 @@ namespace AnguiumMath
 		return ret;
 	}
 
-	// TODO:: TEMPORARY!
-	static D3DXVECTOR2 Rotate2D( D3DXVECTOR2 _vec, float _radians )
-	{
-		//	Convert into the Cartesian coordinate system
-		_vec.y *= -1.0f;
-	
-		D3DXVECTOR2 vRotated;
-		vRotated.x = ( cos( _radians ) * _vec.x) + (sin( _radians ) * _vec.y);
-		vRotated.y = (-sin( _radians ) * _vec.x) + (cos( _radians ) * _vec.y);
-	
-		//	Convert back to our windows coordinate system
-		vRotated.y *= -1.0f;
-	
-		//	Return our rotated vector
-		return vRotated;
-	}
-
 	struct Vector2
 	{
 	public:
@@ -86,6 +69,7 @@ namespace AnguiumMath
 		};
 	
 		static const Vector2 ZERO;
+		static const Vector2 ONE;
 	
 		// Constructors
 		Vector2( void );
@@ -112,6 +96,10 @@ namespace AnguiumMath
 		const Vector2 Abs( void ) const;
 		// Clamps the value between the min and max
 		void Clamp( const Vector2& _min, const Vector2& _max );
+		// Rotates the vector
+		void Rotate2D( const Vector2& _vec, const f32& _radians );
+		// 
+		float Steering( const Vector2& _other );
 	
 		// Operators
 		inline Vector2& operator=( const Vector2& _rhs )		{ x = _rhs.x; y = _rhs.y; return *this;			}
@@ -160,6 +148,7 @@ namespace AnguiumMath
 		};
 	
 		static const Vector3 ZERO;
+		static const Vector3 ONE;
 	
 		// Constructors
 		Vector3( void );
@@ -291,6 +280,8 @@ namespace AnguiumMath
 		// Scales the matrix 
 		void Scale( const Vector3& _scale );
 		void Scale( const float& _scale );
+		// Rotation
+		void RotateZ( const float& _angle );
 		// Translates the matrix 
 		void Translate( const Vector3& _translation );
 		// Create projection matrices
@@ -300,12 +291,48 @@ namespace AnguiumMath
 		// Returns the position of the matrix
 		const Vector3 Position( void ) const;
 	
+		void Multiply( Matrix* _out, const Matrix* _lhs, const Matrix* _rhs ) const;
+
 		// Operator
 		Matrix operator*( const Matrix& _rhs ) const;
 		Matrix operator+( const Matrix& _rhs ) const;
+		Matrix& operator*=( const Matrix& _rhs );
+		Matrix& operator+=( const Matrix& _rhs );
 		inline Matrix& operator=( const Matrix& _rhs ) { for( int i = 0; i < 16; ++i ) a[i] = _rhs.a[i]; return *this;	}
 		inline float operator[]( const unsigned int& _index ) const	{ return a[_index]; }
 		inline float& operator[]( const unsigned int& _index )		{ return a[_index]; }
+	};
+
+	class Transform
+	{
+		Matrix	world;
+		Vector2 pos;
+		Vector2 scale;
+		Vector2 center;
+		Vector2 dir;
+		f32		rot;
+		bool isDirty;
+		
+		void CalcDir( void );
+		void CalcWorld( void );
+	public:
+		Transform( void );
+		
+		void Update( f32 _timing );
+		
+		// Accessors
+		inline Matrix GetWorld( void ) const	{ return world;	 }
+		inline Vector2 GetPos( void ) const		{ return pos;	 }
+		inline Vector2 GetScale( void ) const	{ return scale;	 }
+		inline Vector2 GetCenter( void ) const	{ return center; }
+		inline Vector2 GetDir( void ) const		{ return dir;	 }
+		inline f32 GetRot( void ) const			{ return rot;	 }
+
+		// Mutators
+		void SetPos( const Vector2& _pos )			{ pos = _pos;		isDirty = true; }
+		void SetScale( const Vector2& _scale )		{ scale = _scale;	isDirty = true; }
+		void SetCenter( const Vector2& _center )	{ center = _center; isDirty = true; }
+		void SetRot( const f32& _rot )				{ rot = _rot;		isDirty = true; }
 	};
 }
 

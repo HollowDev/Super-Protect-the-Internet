@@ -7,7 +7,7 @@
 #include "AnguiumEngine.h"
 #include "GameObject.h"
 
-unsigned int GameObject::s_HandleCounter = 0;
+u32 GameObject::s_HandleCounter = 0;
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 Summary: Default constructor
@@ -53,6 +53,7 @@ Summary: Updates the object
 Params:
 	_timing - the time that has passed since the last frame
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-void GameObject::Update( float _timing )
+void GameObject::Update( f32 _timing )
 {
+	m_Transform.Update( _timing );
 }

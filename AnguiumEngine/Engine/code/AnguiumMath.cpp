@@ -7,7 +7,9 @@
 #include "AnguiumEngine.h"
 
 const Vector2 Vector2::ZERO( 0.0f, 0.0f );
+const Vector2 Vector2::ONE( 1.0f, 1.0f );
 const Vector3 Vector3::ZERO( 0.0f, 0.0f, 0.0f );
+const Vector3 Vector3::ONE( 1.0f, 1.0f, 1.0f );
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 Summary: Default constructor
@@ -165,6 +167,32 @@ void Vector2::Clamp( const Vector2& _min, const Vector2& _max )
 		AnguiumMath::Clamp( this->x, _min.x, _max.x ),
 		AnguiumMath::Clamp( this->y, _min.y, _max.y )
 	);
+}
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Summary: Clamps the vector between the min and max
+Params:
+	_min - the minimum value
+	_max - the maximum value
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+void Vector2::Rotate2D( const Vector2& _vec, const f32& _radians )
+{
+	// Convert into the Cartesian coordinate system
+	Vector2 cVec = _vec;
+	// Rotate the vector
+	this->x = ( cos( _radians ) * _vec.x) + (sin( _radians ) * _vec.y);
+	this->y = (-sin( _radians ) * _vec.x) + (cos( _radians ) * _vec.y);
+}
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Summary: Returns the angle--in radians--between the vectors
+Params:
+	_other - the vector to check the angle between
+	_isRad - is the returned angle in radians?
+Return:
+	const float - the angle in radian
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+float Vector2::Steering( const Vector2& _other )
+{
+	return (this->x * _other.y) - (this->y * _other.x);
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -425,6 +453,20 @@ void Matrix::Scale( const Vector3& _scale )
 	this->_20 *= _scale.x; this->_21 *= _scale.y; this->_22 *= _scale.z; 
 }
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Summary: Rotates the matrix on the Z axis
+Params:
+	_angle - the amount to rotate by
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+void Matrix::RotateZ( const float& _angle )
+{
+	this->Identity();
+	this->m[0][0] =  cosf( _angle );
+	this->m[1][1] =  cosf( _angle );
+	this->m[0][1] =  sinf( _angle );
+	this->m[1][0] = -sinf( _angle );
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 Summary: Scales the matrix 
 Params:
 	_scale - the float to scale by
@@ -442,9 +484,9 @@ Params:
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 void Matrix::Translate( const Vector3& _translation )
 {
-	this->_03 += _translation.x;
-	this->_13 += _translation.y;
-	this->_23 += _translation.z;
+	this->m[3][0] += _translation.x;
+	this->m[3][1] += _translation.y;
+	this->m[3][2] += _translation.z;
 }
 // Create projection matrices
 void Matrix::CreateOrthoOffCenterLH( f32 _l, f32 _r, f32 _b, f32 _t, f32 _zn, f32 _zf )
@@ -564,6 +606,18 @@ const Vector3 Matrix::Position( void ) const
 {
 	return Vector3( _03, _13, _23 );
 }
+
+void Matrix::Multiply( Matrix* _out, const Matrix* _lhs, const Matrix* _rhs ) const
+{
+	for( int i = 0; i < 4; i++ )
+	{
+		for( int j = 0; j < 4; j++ )
+		{
+			_out->m[i][j] = _lhs->m[i][0] * _rhs->m[0][j] + _lhs->m[i][1] * _rhs->m[1][j] + _lhs->m[i][2] * _rhs->m[2][j] + _lhs->m[i][3] * _rhs->m[3][j];
+		}
+	}
+}
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 Summary: operator* overload
 Params:
@@ -573,34 +627,16 @@ Return:
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 Matrix Matrix::operator*( const Matrix& _rhs ) const
 {
-	return Matrix(
-		(_00 * this->_00) + (_01 * this->_10) + (_02 * this->_20) + (_03 * this->_30),
-		(_00 * this->_01) + (_01 * this->_11) + (_02 * this->_21) + (_03 * this->_31),
-		(_00 * this->_02) + (_01 * this->_12) + (_02 * this->_22) + (_03 * this->_32),
-		(_00 * this->_03) + (_01 * this->_13) + (_02 * this->_23) + (_03 * this->_33),
-
-		(_10 * this->_00) + (_11 * this->_10) + (_12 * this->_20) + (_13 * this->_30),
-		(_10 * this->_01) + (_11 * this->_11) + (_12 * this->_21) + (_13 * this->_31),
-		(_10 * this->_02) + (_11 * this->_12) + (_12 * this->_22) + (_13 * this->_32),
-		(_10 * this->_03) + (_11 * this->_13) + (_12 * this->_23) + (_13 * this->_33),
-
-		(_20 * this->_00) + (_21 * this->_10) + (_22 * this->_20) + (_23 * this->_30),
-		(_20 * this->_01) + (_21 * this->_11) + (_22 * this->_21) + (_23 * this->_31),
-		(_20 * this->_02) + (_21 * this->_12) + (_22 * this->_22) + (_23 * this->_32),
-		(_20 * this->_03) + (_21 * this->_13) + (_22 * this->_23) + (_23 * this->_33),
-
-		(_30 * this->_00) + (_31 * this->_10) + (_32 * this->_20) + (_33 * this->_30),
-		(_30 * this->_01) + (_31 * this->_11) + (_32 * this->_21) + (_33 * this->_31),
-		(_30 * this->_02) + (_31 * this->_12) + (_32 * this->_22) + (_33 * this->_32),
-		(_30 * this->_03) + (_31 * this->_13) + (_32 * this->_23) + (_33 * this->_33)
-	);
+	Matrix ret;
+	this->Multiply( &ret, this, &_rhs );
+	return ret;
 }
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-Summary: operator* overload
+Summary: operator+ overload
 Params:
-	_rhs - the matrix to multiply with
+	_rhs - the matrix to add with
 Return:
-	Matrix - the resulting multiplied matrix
+	Matrix - the resulting combined matrix
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 Matrix Matrix::operator+( const Matrix& _rhs ) const
 {
@@ -610,4 +646,95 @@ Matrix Matrix::operator+( const Matrix& _rhs ) const
 		_20 + _rhs._20, _21 + _rhs._21, _22 + _rhs._22, _23 + _rhs._23,
 		_30 + _rhs._30, _31 + _rhs._31, _32 + _rhs._32, _33 + _rhs._33
 	);
+}
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Summary: operator*= overload
+Params:
+	_rhs - the matrix to multiply with
+Return:
+	Matrix - the resulting multiplied matrix
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+Matrix& Matrix::operator*=( const Matrix& _rhs )
+{
+	Matrix self = *this;
+
+	for( int i = 0; i < 4; i++ )
+	{
+		for( int j = 0; j < 4; j++ )
+		{
+			this->m[i][j] = self.m[i][0] * _rhs.m[0][j] + self.m[i][1] * _rhs.m[1][j] + self.m[i][2] * _rhs.m[2][j] + self.m[i][3] * _rhs.m[3][j];
+		}
+	}
+	return *this;
+}
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Summary: operator+= overload
+Params:
+	_rhs - the matrix to add with
+Return:
+	Matrix - the resulting combined matrix
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+Matrix& Matrix::operator+=( const Matrix& _rhs )
+{
+	Matrix( this->operator+( _rhs ) );
+	return *this;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Summary: Default constructor
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+Transform::Transform( void ) :
+	world( Matrix::IDENTITY ),
+	pos( 0.0f, 0.0f ),
+	scale( 1.0f, 1.0f ),
+	center( 0.0f, 0.0f ),
+	dir( 0.0f, 1.0f ),
+	rot( 0.0f ),
+	isDirty( true ) // calc stuff at the start!
+{
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Summary: Updates the transform, applying any changes if needed
+Params:
+	_timing - the time that has passed since the last frame
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+void Transform::Update( f32 _timing )
+{
+	// If it's dirty, calculate the new world and direction
+	if( !isDirty ) return;
+
+	CalcWorld();
+	CalcDir();
+
+	// It ain't dirty no mo!
+	isDirty = false;
+}
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Summary: Calculates the new directional vector based on the current rotation value
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+void Transform::CalcDir( void )
+{
+	dir.Rotate2D( Vector2( 0.0f, 1.0f ), rot );
+}
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Summary: Calculates the new world matrix, based on the transforms
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+void Transform::CalcWorld( void )
+{
+	Matrix combined, translateMat, scaleMat, rotationMat;
+	combined.Identity();
+	// Scale the sprite.
+	scaleMat.Scale( Vector3( scale.x, scale.y, 1.0f ) );
+	combined *= scaleMat;
+
+	// Rotate the sprite.
+	rotationMat.RotateZ( -rot );
+	combined *= rotationMat;
+
+	// Translate the sprite
+	translateMat.Translate( Vector3( pos.x, pos.y, 0.0f ) );
+	combined *= translateMat;
+
+	world = combined;
 }

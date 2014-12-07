@@ -5,6 +5,7 @@
 enum GameObjects
 {
 	GOT_Player = 1,
+	GOT_Projectile,
 
 	GOT_Num
 };

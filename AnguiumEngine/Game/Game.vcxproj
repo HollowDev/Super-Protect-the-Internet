@@ -74,6 +74,7 @@
     <ClCompile Include="code\GameCamera.cpp" />
     <ClCompile Include="code\GameMain.cpp" />
     <ClCompile Include="code\Player.cpp" />
+    <ClCompile Include="code\Projectile.cpp" />
     <ClCompile Include="code\TestState.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -81,6 +82,7 @@
     <ClInclude Include="code\GameDefines.h" />
     <ClInclude Include="code\GameObjectDefines.h" />
     <ClInclude Include="code\Player.h" />
+    <ClInclude Include="code\Projectile.h" />
     <ClInclude Include="code\TestState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -98,7 +98,6 @@
     <ClCompile Include="code\StateSystem.cpp" />
     <ClCompile Include="code\Timer.cpp" />
     <ClCompile Include="code\Quad.cpp" />
-    <ClCompile Include="code\Transform.cpp" />
     <ClCompile Include="code\VertexBuffer.cpp" />
     <ClCompile Include="code\RenderObject.cpp" />
     <ClCompile Include="code\Renderer.cpp" />
@@ -120,7 +119,6 @@
     <ClInclude Include="code\StateSystem.h" />
     <ClInclude Include="code\Timer.h" />
     <ClInclude Include="code\Quad.h" />
-    <ClInclude Include="code\Transform.h" />
     <ClInclude Include="code\Vertex.h" />
     <ClInclude Include="code\VertexBuffer.h" />
     <ClInclude Include="code\RenderObject.h" />

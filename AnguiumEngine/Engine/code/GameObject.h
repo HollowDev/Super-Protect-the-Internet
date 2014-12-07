@@ -10,14 +10,17 @@
 
 namespace AnguiumEngine
 {
+	using namespace AnguiumMath;
 
 	class GameObject
 	{
-		static unsigned int s_HandleCounter;
-		unsigned int m_Handle;
-		bool m_IsActive;
+		static u32 s_HandleCounter;
+		u32 m_Handle;
 	protected:
-		unsigned int m_Type;
+		u32 m_Type;
+		bool m_IsActive;
+
+		Transform m_Transform;
 	
 	public:
 		GameObject( void );
@@ -27,12 +30,17 @@ namespace AnguiumEngine
 		virtual void Release( void );
 		virtual void Launch( void );
 		virtual void Exit( void );
-		virtual void Update( float _timing );
+		virtual void Update( f32 _timing );
+
+		// Mutators
+		inline void SetType( u32 _type ) { m_Type = _type; }
 
 		// Accessors
-		unsigned int GetHandle( void ) const { return m_Handle; }
-		unsigned int GetType( void ) const { return m_Type; }
-		bool IsActive( void ) const { return m_IsActive; }
+		inline u32 GetHandle( void ) const			{ return m_Handle;		}
+		inline u32 GetType( void ) const			{ return m_Type;		}
+		inline bool IsActive( void ) const			{ return m_IsActive;	}
+		inline Transform GetTransform( void ) const { return m_Transform;	}
+		
 	};
 
 }

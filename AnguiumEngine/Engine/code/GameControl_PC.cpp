@@ -79,6 +79,8 @@ void GameControl::Initialize( const wchar_t* _title, u32 _windowWidth, u32 _wind
 	// Initialize the state system
 	m_StateSystem = new StateSystem();
 	m_StateSystem->Launch( _startState );
+	
+	g_Timer->Reset();
 }
 
 void GameControl::Run( void )

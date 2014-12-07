@@ -1,5 +1,7 @@
 #include "Player.h"
 
+#include "Projectile.h"
+
 Player::Player( void )
 {
 	m_RenderObject = new RenderObject();
@@ -12,6 +14,7 @@ Player::~Player( void )
 void Player::Release( void )
 {
 	SAFE_DELETE( m_RenderObject );
+	GameObject::Release();
 }
 
 void Player::Launch( void )
@@ -33,4 +36,70 @@ void Player::Exit( void )
 
 void Player::Update( f32 _timing )
 {
+	if( _timing == 0.0f ) return;
+
+	Vector2 scale = Vector2::ZERO;
+	Vector2 vel = Vector2::ZERO;
+	f32 moveSpeed = 150.0f; // in pixels a second
+	f32 scaleSpeed = 1.0f; // in pixels a second
+	f32 rotSpeed = AE_DEG_TO_RAD(90.0f); // in pixels a second
+	
+	// Movemement test
+	if( GetAsyncKeyState( 'W' ) )
+		vel.y += moveSpeed * _timing;
+	else if( GetAsyncKeyState( 'S' ) )
+		vel.y -= moveSpeed * _timing;
+	
+	if( GetAsyncKeyState( 'D' ) )
+		vel.x += moveSpeed * _timing;
+	else if( GetAsyncKeyState( 'A' ) )
+		vel.x -= moveSpeed * _timing;
+	
+	if( vel.Length() > moveSpeed )
+	{
+		vel = vel.Normalize();
+		vel *= moveSpeed*_timing;
+	}
+	m_Transform.SetPos( m_Transform.GetPos() + m_Transform.GetDir() * vel.y );
+
+	// Scaling test
+	if( GetAsyncKeyState( 'I' ) )
+		scale.y += scaleSpeed * _timing;
+	else if( GetAsyncKeyState( 'K' ) )
+		scale.y -= scaleSpeed * _timing;
+	
+	if( GetAsyncKeyState( 'L' ) )
+		scale.x += scaleSpeed * _timing;
+	else if( GetAsyncKeyState( 'J' ) )
+		scale.x -= scaleSpeed * _timing;
+	
+	m_Transform.SetScale( m_Transform.GetScale() + scale );
+	
+	// Scaling test
+	if( GetAsyncKeyState( 'D' ) )
+		m_Transform.SetRot( m_Transform.GetRot() + rotSpeed * _timing );
+	else if( GetAsyncKeyState( 'A' ) )
+		m_Transform.SetRot( m_Transform.GetRot() - rotSpeed * _timing );
+
+	if( GetAsyncKeyState( 'P' ) )
+	{
+		m_Transform.SetScale( Vector2::ONE );
+		m_Transform.SetRot( 0.0f );
+	}
+
+	static bool hasFired = false;
+	if( GetAsyncKeyState( VK_SPACE ) )
+	{
+		if( !hasFired )
+		{
+			Projectile* bullet = reinterpret_cast<Projectile*>( g_ObjectManager->AddObject( GOT_Projectile ) );
+			bullet->Shoot( m_Transform.GetPos(), m_Transform.GetDir(), moveSpeed+25.0f, 2.5f );
+			hasFired = true;
+		}
+	}
+	else
+		hasFired = false;
+
+	GameObject::Update( _timing );
+	m_RenderObject->SetWorld( m_Transform.GetWorld() );
 }

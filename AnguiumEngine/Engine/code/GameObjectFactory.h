@@ -11,9 +11,9 @@ namespace AnguiumEngine
 	class GameObjectFactory
 	{
 		// Array of memory
-		GameObject** m_Pool[256];
+		GameObject** m_Pool[MAX_OBJECT_TYPE_INFO];
 		// Queue of open data indices
-		queue<unsigned int> m_OpenList[256];
+		queue<u32> m_OpenList[MAX_OBJECT_TYPE_INFO];
 	
 	public:
 		GameObjectFactory( void );
@@ -22,8 +22,8 @@ namespace AnguiumEngine
 		void Launch( void );
 		void Release( void );	
 	
-		GameObject* Alloc( unsigned int _type );
-		void Free( GameObject* _object, unsigned int _type );
+		GameObject* Alloc( u32 _type );
+		void Free( GameObject* _object, u32 _type );
 	};
 }
 

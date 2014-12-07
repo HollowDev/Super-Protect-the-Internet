@@ -4,7 +4,7 @@
 
 namespace AnguiumEngine
 {
-	static const unsigned int MAX_OBJECT_TYPE_INFO = 256;
+	static const u32 MAX_OBJECT_TYPE_INFO = 256;
 	extern class GameObjectTypeInfo* g_GameObjectInfo[MAX_OBJECT_TYPE_INFO];
 	
 	class GameObject;
@@ -14,15 +14,15 @@ namespace AnguiumEngine
 	
 		
 		const wchar_t* m_Name;
-		unsigned int m_Type;
-		unsigned int m_MaxCount;	// maximum number of these in game
-		unsigned int m_SizeOf;		// size of the object
+		u32 m_Type;
+		u32 m_MaxCount;	// maximum number of these in game
+		u32 m_SizeOf;		// size of the object
 		BuildObjectFunction m_BuildObjectFunc;
 	public:
 		GameObjectTypeInfo( const wchar_t* _name, 
-							unsigned int _type, 
-							unsigned int _maxCount,
-							unsigned int _sizeOf,
+							u32 _type, 
+							u32 _maxCount,
+							u32 _sizeOf,
 							BuildObjectFunction _buildObjectFunc ) :
 				m_Name(_name),
 				m_Type(_type),
@@ -30,8 +30,7 @@ namespace AnguiumEngine
 				m_SizeOf(_sizeOf),
 				m_BuildObjectFunc(_buildObjectFunc)
 		{
-			/*ASSERT(_type < MAX_OBJECT_TYPE_INFO, "GameObjectTypeInfo::Constructor -- type identifier is out of range" );*/
-			/*ASSERT(s_ObjectInfo[m_Type] == NULL, "GameObjectTypeInfo::Constructor -- type info already exists!" );*/
+			ASSERT( _type < MAX_OBJECT_TYPE_INFO && "<GameObjectTypeInfo::Constructor> -- type identifier is out of range" );
 			g_GameObjectInfo[m_Type] = this;
 		}
 		~GameObjectTypeInfo( void ) {}
@@ -39,10 +38,10 @@ namespace AnguiumEngine
 		GameObject* Create( void ) const  { return m_BuildObjectFunc(); }
 	
 		// Accessors
-		const wchar_t* GetName( void ) const { return m_Name; }
-		unsigned int GetType( void ) const { return m_Type; }
-		unsigned int GetMaxCount( void ) const { return m_MaxCount; }
-		unsigned int GetSizeOf( void ) const { return m_SizeOf; }
+		const wchar_t* GetName( void ) const	{ return m_Name;		}
+		u32 GetType( void ) const				{ return m_Type;		}
+		u32 GetMaxCount( void ) const			{ return m_MaxCount;	}
+		u32 GetSizeOf( void ) const				{ return m_SizeOf;		}
 	};
 	
 	#define GAME_OBJECT_REGISTER(classType,maxCount)	\

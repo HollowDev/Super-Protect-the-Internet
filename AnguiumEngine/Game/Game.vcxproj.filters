@@ -11,6 +11,9 @@
     <ClCompile Include="code\Player.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="code\Projectile.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code\GameDefines.h" />
@@ -24,6 +27,9 @@
       <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="code\GameObjectDefines.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="code\Projectile.h">
       <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>

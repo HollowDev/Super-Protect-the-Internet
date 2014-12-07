@@ -4,7 +4,7 @@ RenderObject::RenderObject( void )
 {
 	m_TexID = 0;
 	m_DrawOrder = 0.0f;
-	D3DXMatrixIdentity( &m_World );
+	m_World.Identity();
 	m_IsHUD = false;
 }
 
@@ -26,7 +26,7 @@ void RenderObject::Render( IDirect3DDevice9* _device, ID3DXEffect* _effect )
 		int x = 0;
 	}
 	
-	_effect->SetMatrix( "gWorld", &m_World );
+	_effect->SetMatrix( "gWorld", &D3DXMATRIX( m_World.a ) );
 	_effect->SetTexture( "gTexture", texture );
 	_effect->CommitChanges();
 

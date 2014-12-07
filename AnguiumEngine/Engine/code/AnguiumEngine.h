@@ -61,6 +61,7 @@ using std::vector;
 #include "Timer.h"
 #include "GameControl.h"
 #include "Camera.h"
+#include "RenderObject.h"
 
 using namespace std; // Oh noes, I has std's!
 using namespace AnguiumMath;

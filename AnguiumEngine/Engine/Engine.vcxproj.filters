@@ -49,9 +49,6 @@
     <ClCompile Include="code\Camera.cpp">
       <Filter>Foundation\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="code\Transform.cpp">
-      <Filter>Foundation</Filter>
-    </ClCompile>
     <ClCompile Include="code\AssetPool.cpp">
       <Filter>Foundation\Assets</Filter>
     </ClCompile>
@@ -111,9 +108,6 @@
     </ClInclude>
     <ClInclude Include="code\Camera.h">
       <Filter>Foundation\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="code\Transform.h">
-      <Filter>Foundation</Filter>
     </ClInclude>
     <ClInclude Include="code\AssetPool.h">
       <Filter>Foundation\Assets</Filter>
