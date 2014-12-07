@@ -18,7 +18,7 @@ public:
 	GameCamera( void );
 	~GameCamera( void );
 
-	void Launch( D3DXVECTOR2 _startPos );
+	void Launch( Vector2 _startPos );
 	void Close( void );
 
 	virtual void Update( float _timing );

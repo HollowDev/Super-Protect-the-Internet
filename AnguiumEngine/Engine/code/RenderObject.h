@@ -19,7 +19,7 @@ namespace AnguiumEngine
 		RenderObject( void );
 		~RenderObject( void );
 	
-		void Render( IDirect3DDevice9* _device, ID3DXEffect* _effect );
+		void Render( IDirect3DDevice9* _device, ShaderPass* _effect );
 	
 		// Accessors
 		inline u32 GetTexID( void )				{ return m_TexID;		}
@@ -32,7 +32,6 @@ namespace AnguiumEngine
 		inline void SetDrawOrder( f32 _drawOrder )		{ m_DrawOrder = _drawOrder; }
 		inline void SetWorld( Matrix& _world )			{ m_World = _world;			}
 		inline void SetIsHUD( bool _isHUD )				{ m_IsHUD = _isHUD;			}
-		//inline void SetOwner( GameObject* _owner )		{ m_Owner = _owner;			}
 	};
 
 }

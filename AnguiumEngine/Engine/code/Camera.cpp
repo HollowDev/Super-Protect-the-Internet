@@ -1,11 +1,11 @@
 #include "AnguiumEngine.h"
 
-Camera::Camera( void )
+Camera::Camera( void ) :
+	m_View( Matrix::IDENTITY ),
+	m_Projection( Matrix::IDENTITY ),
+	m_ViewProjection( Matrix::IDENTITY ),
+	m_Pos( Vector2::ONE )
 {
-	D3DXMatrixIdentity( &m_View );
-	D3DXMatrixIdentity( &m_Projection );
-	D3DXMatrixIdentity( &m_ViewProjection );
-	m_Pos = D3DXVECTOR2( 0.0f, 0.0f );
 }
 Camera::~Camera( void )
 {
@@ -13,15 +13,14 @@ Camera::~Camera( void )
 
 void Camera::Update( float _timing )
 {
-	D3DXMatrixIdentity( &m_View );
-	D3DXMatrixTranslation( &m_View, float(int(m_Pos.x)), float(int(m_Pos.y)), 0.0f );
+	m_View.Identity();
+	m_View.Translate( Vector3( m_Pos.x, m_Pos.y, 0.0f ) );
 	
 	m_ViewProjection = m_View * m_Projection;
 }
 
 void Camera::CreateOrthographic( float _halfWidth, float _halfHeight )
 {
-	D3DXMatrixOrthoOffCenterLH( &m_Projection, -_halfWidth, _halfWidth, -_halfHeight, _halfHeight, 0.0f, 1.0f );
-
+	m_Projection.CreateOrthoOffCenterLH( -_halfWidth, _halfWidth, -_halfHeight, _halfHeight, 0.0f, 1.0f );
 	m_ViewProjection = m_View * m_Projection;
 }

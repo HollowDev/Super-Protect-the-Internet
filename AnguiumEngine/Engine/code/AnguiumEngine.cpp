@@ -35,7 +35,7 @@ void AnguiumEngineLaunch( const wchar_t* _title, u32 _width, u32 _height, GameSt
 	g_ObjectFactory->Launch(); // launch here, not in constructor
 	g_GameControl->Initialize( _title, _width, _height, _startState );
 	g_D3D9Handler->Launch( g_GameControl->GetHWND() );
-	g_Renderer->Launch( g_D3D9Handler->m_Device, L"assets/effects/textured.fx" );
+	g_Renderer->Launch( g_D3D9Handler->m_Device, "assets/effects/textured.fx" );
 }
 
 void AnguiumEngineRun( void )

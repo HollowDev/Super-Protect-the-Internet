@@ -13,7 +13,7 @@ RenderObject::~RenderObject( void )
 
 }
 
-void RenderObject::Render( IDirect3DDevice9* _device, ID3DXEffect* _effect )
+void RenderObject::Render( IDirect3DDevice9* _device, ShaderPass* _effect )
 {
 	// Get the mesh from the object pool
 	// Get the texture from the object pool
@@ -26,9 +26,9 @@ void RenderObject::Render( IDirect3DDevice9* _device, ID3DXEffect* _effect )
 		int x = 0;
 	}
 	
-	_effect->SetMatrix( "gWorld", &D3DXMATRIX( m_World.a ) );
+	_effect->SetMatrix( "gWorld", &m_World );
 	_effect->SetTexture( "gTexture", texture );
-	_effect->CommitChanges();
+	_effect->Commit();
 
 	IDirect3DVertexBuffer9* vbuffer		= quad->GetVertexBuffer()->GetBuffer();
 	IDirect3DVertexDeclaration9* decl	= quad->GetVertexBuffer()->GetDecl();

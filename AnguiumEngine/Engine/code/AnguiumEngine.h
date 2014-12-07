@@ -50,6 +50,7 @@ using std::vector;
 #include "GameObjectFactory.h"
 #include "GameObjectManager.h"
 #include "D3D9Handler.h"
+#include "ShaderPass.h"
 #include "Renderer.h"
 #include "Vertex.h"
 #include "VertexBuffer.h"

@@ -17,10 +17,10 @@ Renderer::~Renderer( void )
 
 }
 	
-void Renderer::Launch( IDirect3DDevice9* _d3d9device, const wchar_t* _effectFilePath )
+void Renderer::Launch( IDirect3DDevice9* _d3d9device, const char* _effectFilePath )
 {
 	m_D3D9Device = _d3d9device;
-	D3DXCreateEffectFromFile( m_D3D9Device, _effectFilePath, 0, 0, 0, 0, &m_Effect, 0 );
+	m_Shader.Initialize( _effectFilePath );
 }
 
 void Renderer::Render( void )
@@ -38,32 +38,31 @@ void Renderer::Render( void )
 		
 
 		// Render the sorted objects using the shader
-		unsigned passes = 0;
-		m_Effect->Begin( &passes, 0 );
+		unsigned passes = m_Shader.Begin();
 		for( unsigned int i = 0; i < passes; ++i )
 		{
-			m_Effect->BeginPass( i );
+			m_Shader.BeginPass( i );
 			{
 				if( m_Camera )
 				{
-					m_Effect->SetMatrix( "gViewProjection", &m_Camera->GetViewProj() );
+					m_Shader.SetMatrix( "gViewProjection", &m_Camera->GetViewProj() );
 				}
 
 				vector< RenderObject* >::iterator iter = m_SortedObjects.begin();
 				for( iter; iter != m_SortedObjects.end(); ++iter )
 				{
 					if( (*iter)->GetIsHUD() )
-						m_Effect->SetMatrix( "gViewProjection", &m_Camera->GetProj() );
+						m_Shader.SetMatrix( "gViewProjection", &m_Camera->GetProj() );
 					else
-						m_Effect->SetMatrix( "gViewProjection", &m_Camera->GetViewProj() );
+						m_Shader.SetMatrix( "gViewProjection", &m_Camera->GetViewProj() );
 
 
-					(*iter)->Render( m_D3D9Device, m_Effect );
+					(*iter)->Render( m_D3D9Device, &m_Shader );
 				}
 			}
-			m_Effect->EndPass();
+			m_Shader.EndPass();
 		}
-		m_Effect->End();
+		m_Shader.End();
 	}
 
 	m_D3D9Device->EndScene();

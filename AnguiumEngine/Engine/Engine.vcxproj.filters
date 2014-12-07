@@ -19,6 +19,9 @@
     <Filter Include="Foundation\App Management">
       <UniqueIdentifier>{241fe64f-fe69-4296-ab9f-84ac0becd165}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Foundation\Renderer\Types">
+      <UniqueIdentifier>{ec0d281d-a8c1-4b81-9269-091b1535e663}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="code\AnguiumMath.cpp">
@@ -75,6 +78,9 @@
     </ClCompile>
     <ClCompile Include="code\GameObjectTypeInfo.cpp">
       <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="code\ShaderPass_DX9.cpp">
+      <Filter>Foundation\Renderer\Types</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -135,6 +141,9 @@
     </ClInclude>
     <ClInclude Include="code\GameObjectTypeInfo.h">
       <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="code\ShaderPass.h">
+      <Filter>Foundation\Renderer\Types</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

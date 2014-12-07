@@ -17,7 +17,7 @@ TestState::~TestState( void )
 void TestState::Launch( void )
 {
 	m_Camera = new GameCamera();
-	m_Camera->Launch( D3DXVECTOR2( 0.0f, 300.0f ) );
+	m_Camera->Launch( Vector2( 0.0f, 300.0f ) );
 
 	g_AssetPool->AddTexture( L"assets/textures/super_ship_yay.png" );
 	g_AssetPool->AddTexture( L"assets/textures/projectile.png" );

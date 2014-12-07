@@ -11,7 +11,7 @@ GameCamera::~GameCamera( void )
 {
 }
 
-void GameCamera::Launch( D3DXVECTOR2 _startPos )
+void GameCamera::Launch( Vector2 _startPos )
 {	
 	Camera::CreateOrthographic( WINDOW_WIDTH/2, WINDOW_HEIGHT/2 );
 	m_Pos = -_startPos;
