@@ -67,19 +67,6 @@ VS_OUTPUT myVertexShader(VS_INPUT input)
 float4 myPixelShader(VS_OUTPUT input) : COLOR
 {	
 	float4 color =  tex2D( gTextureSampler, input.texcoord );
-	
-	if( color.a == 0.0f )
-		return color;
-	
-	if( int(color.r * 255.0f )== 248 )
-		color = colorPallette[0];
-	else if( int(color.r * 255.0f) == 184 )
-		color = colorPallette[1];
-	else if( int(color.r * 255.0f) == 128 )
-		color = colorPallette[2];
-	else if( int(color.r * 255.0f) == 64 )
-		color = colorPallette[3];
-	
 	return color;
 }
 

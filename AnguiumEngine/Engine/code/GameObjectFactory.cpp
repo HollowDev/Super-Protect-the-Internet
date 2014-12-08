@@ -24,15 +24,18 @@ void GameObjectFactory::Launch( void )
 	{
 		// Check if the object has info
 		GameObjectTypeInfo* info = g_GameObjectInfo[i];
-		if( !info ) continue;
+		if( !info )
+		{
+			m_Pool[i] = nullptr;
+			continue;
+		}
 
 		// Initialize an array of the requested size
 		u32 allocSize = info->GetMaxCount();
-		m_Pool[i] = new GameObject*[allocSize];
+		// Create the object from the info and plug it into the array
+		m_Pool[i] = info->Create(allocSize);
 		for( u32 x = 0; x < allocSize; ++x )
 		{
-			// Create the object from the info and plug it into the array
-			m_Pool[i][x] = info->Create();
 			// Push the indices into the open list.
 			m_OpenList[i].push(x);
 		}
@@ -47,17 +50,8 @@ void GameObjectFactory::Release( void )
 		GameObjectTypeInfo* info = g_GameObjectInfo[i];
 		if( !info || !m_Pool[i] ) continue;
 
-		// Grab the size of the allocated array
-		u32 allocSize = info->GetMaxCount();
-		for( u32 x = 0; x < allocSize; ++x )
-		{
-			// Delete each game object from the factory
-			m_Pool[i][x]->Release();
-			delete m_Pool[i][x];
-			m_Pool[i][x] = nullptr;
-		}
 		// Delete the array of objects
-		delete [] m_Pool[i];
+		info->Destroy(m_Pool[i]);
 		m_Pool[i] = nullptr;
 	}
 }
@@ -65,11 +59,10 @@ void GameObjectFactory::Release( void )
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 Desc: Grabs memory from the factory to plug into _object
 Params:
+	_object - the object to plug the information into
 	_type - the type of object to create
-Return:
-	_object - the object that was created
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-GameObject* GameObjectFactory::Alloc( u32 _type )
+void GameObjectFactory::Alloc( Object** _object, u32 _type )
 {
 	// If the open list is empty there is nothing we can do
 	queue<u32>& openList = m_OpenList[_type];
@@ -79,12 +72,20 @@ GameObject* GameObjectFactory::Alloc( u32 _type )
 	u32 index = openList.front();
 	openList.pop();
 	
+	// Grab the type info for this object
+	GameObjectTypeInfo* info = g_GameObjectInfo[_type];
+	ASSERT( info );
 	// return the object to the user
-	return m_Pool[_type][index];
+	info->Cast( _object, m_Pool[_type], index );
 }
 
-	
-void GameObjectFactory::Free( GameObject* _object, u32 _type )
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Desc: Frees the memory back into the object factory
+Params:
+	_object - the object to plug the information into
+	_type - the type of object to create
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+void GameObjectFactory::Free( Object* _object, u32 _type )
 {
 	GameObjectTypeInfo* info = g_GameObjectInfo[_type];
 	ASSERT( info );
@@ -94,7 +95,7 @@ void GameObjectFactory::Free( GameObject* _object, u32 _type )
 	u32 sizeOf = info->GetSizeOf();
 
 	// Pointer math to determine the index of the object
-	u32 loc = ((s32)_object - (s32)&(m_Pool[_type])[0]) / sizeOf;
+	u32 loc = ((s32)_object - (s32)&m_Pool[_type][0]) / sizeOf;
 	ASSERT( !( loc < 0 || loc > allocSize ) );
 	
 	// Push it back into the open list!

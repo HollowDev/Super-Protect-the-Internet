@@ -9,6 +9,8 @@ using namespace AnguiumEngine;
 
 class Player : public GameObject
 {
+	bool hasFired;
+	f32 fireTimer;
 	RenderObject* m_RenderObject;
 
 public:
@@ -21,6 +23,6 @@ public:
 	void Update( f32 _timing );
 };
 
-GAME_OBJECT_REGISTER(Player,1)
+GAME_OBJECT_REGISTER(Player, 2)
 
 #endif

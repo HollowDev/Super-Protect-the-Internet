@@ -1,6 +1,6 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	Name: Game Object
-	Desc: The base to all objects in the game
+	Desc: The base to all game objects
 	
 	Copyright 2014 Hollow Dev - http://www.hollowgamedev.com
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -12,19 +12,14 @@ namespace AnguiumEngine
 {
 	using namespace AnguiumMath;
 
-	class GameObject
+	class GameObject : public Object
 	{
-		static u32 s_HandleCounter;
-		u32 m_Handle;
 	protected:
-		u32 m_Type;
-		bool m_IsActive;
-
 		Transform m_Transform;
 	
 	public:
 		GameObject( void );
-		~GameObject( void );
+		virtual ~GameObject( void );
 	
 		// Interface
 		virtual void Release( void );
@@ -33,12 +28,10 @@ namespace AnguiumEngine
 		virtual void Update( f32 _timing );
 
 		// Mutators
+		inline void SetPos( const Vector2& _pos ) { m_Transform.SetPos( _pos ); }
 		inline void SetType( u32 _type ) { m_Type = _type; }
 
 		// Accessors
-		inline u32 GetHandle( void ) const			{ return m_Handle;		}
-		inline u32 GetType( void ) const			{ return m_Type;		}
-		inline bool IsActive( void ) const			{ return m_IsActive;	}
 		inline Transform GetTransform( void ) const { return m_Transform;	}
 		
 	};

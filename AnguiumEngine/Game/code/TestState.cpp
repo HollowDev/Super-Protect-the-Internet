@@ -24,7 +24,7 @@ void TestState::Launch( void )
 
 	g_Renderer->SetCamera( m_Camera );
 
-	GameObject* player = g_ObjectManager->AddObject( GOT_Player );
+	GameObject* player = g_ObjectManager->AddObject( OT_Player );
 }
 
 void TestState::Close( void )

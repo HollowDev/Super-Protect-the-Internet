@@ -27,7 +27,8 @@ void GameObjectManager::Update( f32 _timing )
 GameObject* GameObjectManager::AddObject( u32 _type )
 {
 	// Create object based on type info
-	GameObject* newObject = g_ObjectFactory->Alloc( _type );
+	GameObject* newObject = nullptr;
+	g_ObjectFactory->Alloc( (Object**)&newObject, _type );
 	// Add it to the hash map via it's unique handle
 	m_Objects[newObject->GetHandle()] = newObject;
 	// Launch the object

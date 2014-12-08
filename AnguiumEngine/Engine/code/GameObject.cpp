@@ -1,20 +1,15 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	Name: Game Object
-	Desc: The base to all objects in the game
+	Desc: The base to all game objects
 	
 	Copyright 2014 Hollow Dev - http://www.hollowgamedev.com
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 #include "AnguiumEngine.h"
-#include "GameObject.h"
-
-u32 GameObject::s_HandleCounter = 0;
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 Summary: Default constructor
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-GameObject::GameObject( void ) :
-	m_Handle(++s_HandleCounter),
-	m_IsActive(false)
+GameObject::GameObject( void )
 {
 }
 

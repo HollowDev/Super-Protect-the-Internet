@@ -4,10 +4,10 @@
 
 enum GameObjects
 {
-	GOT_Player = 1,
-	GOT_Projectile,
+	OT_Player = OT_GameTypesStart,
+	OT_Projectile,
 
-	GOT_Num
+	OT_Num
 };
 
 #endif

@@ -1,11 +1,14 @@
 #include "Projectile.h"
 
-Projectile::Projectile( void )
+Projectile::Projectile( void ) :
+	m_RenderObject(nullptr),
+	m_Speed(0.0f),
+	m_Life(0.0f)
 {
-	m_RenderObject = new RenderObject();
 }
 Projectile::~Projectile( void )
 {
+	Release();
 }
 
 void Projectile::Shoot( Vector2 _pos, Vector2 _dir, f32 _speed, f32 _life )
@@ -30,6 +33,8 @@ void Projectile::Launch( void )
 {
 	GameObject::Launch();
 	
+	if( m_RenderObject == nullptr ) m_RenderObject = new RenderObject();
+
 	m_RenderObject->SetTexID( 1 ); // The id of the last texture loaded... HAXXORS YAY
 	m_RenderObject->SetDrawOrder( 2 );
 	g_Renderer->RegisterRenderObject( m_RenderObject );

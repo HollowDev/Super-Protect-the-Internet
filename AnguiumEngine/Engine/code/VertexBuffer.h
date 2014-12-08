@@ -26,18 +26,25 @@ namespace AnguiumEngine
 			if( m_Verts ) SAFE_DELETE( m_Verts );
 			if( m_Decl ) SAFE_RELEASE( m_Decl );
 			
-			IDirect3DDevice9* device = reinterpret_cast<IDirect3DDevice9*>(g_RenderDevice->GetDevice());
-			ASSERT(device); // make sure it exists!
-			device->CreateVertexDeclaration( (_D3DVERTEXELEMENT9*)g_VertexDescs[VERTEX::id], &m_Decl  );
+			SetupDecl<VERTEX>();
 
 			m_NumVerts = _numVerts;
 			m_Verts = new VERTEX[m_NumVerts];
 			m_TypeLength = sizeof(VERTEX);
 			return (VERTEX*)m_Verts;
 		}
-
 		bool Unlock( void );
 	
+		template<typename VERTEX>
+		void SetupDecl( void )
+		{
+#ifdef AE_DX9
+			IDirect3DDevice9* device = reinterpret_cast<IDirect3DDevice9*>(g_RenderDevice->GetDevice());
+			ASSERT(device); // make sure it exists!
+			device->CreateVertexDeclaration( (_D3DVERTEXELEMENT9*)g_VertexDescs[VERTEX::id], &m_Decl  );
+#endif
+		}
+
 		// Accessors
 		inline IDirect3DVertexBuffer9* GetBuffer( void )	{ return m_Buffer;					}
 		inline IDirect3DVertexDeclaration9* GetDecl( void )	{ return m_Decl;					}

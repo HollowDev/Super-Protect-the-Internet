@@ -94,6 +94,7 @@
     <ClCompile Include="code\IndexBuffer.cpp" />
     <ClCompile Include="code\Camera.cpp" />
     <ClCompile Include="code\AssetPool.cpp" />
+    <ClCompile Include="code\Object.cpp" />
     <ClCompile Include="code\RenderDevice_DX9.cpp" />
     <ClCompile Include="code\RenderPrimitive.cpp" />
     <ClCompile Include="code\ShaderPass_DX9.cpp" />
@@ -111,6 +112,7 @@
     <ClInclude Include="code\AnguiumMath.h" />
     <ClInclude Include="code\AnguiumUtil.h" />
     <ClInclude Include="code\BaseComponent.h" />
+    <ClInclude Include="code\EngineObjectTypes.h" />
     <ClInclude Include="code\GameControl.h" />
     <ClInclude Include="code\GameObject.h" />
     <ClInclude Include="code\GameObjectFactory.h" />
@@ -120,6 +122,7 @@
     <ClInclude Include="code\Camera.h" />
     <ClInclude Include="code\AssetPool.h" />
     <ClInclude Include="code\GameState.h" />
+    <ClInclude Include="code\Object.h" />
     <ClInclude Include="code\RenderDevice.h" />
     <ClInclude Include="code\RenderPrimitive.h" />
     <ClInclude Include="code\ShaderPass.h" />

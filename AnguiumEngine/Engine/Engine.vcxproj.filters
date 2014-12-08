@@ -22,8 +22,11 @@
     <Filter Include="Foundation\Renderer\Types">
       <UniqueIdentifier>{ec0d281d-a8c1-4b81-9269-091b1535e663}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Component">
+    <Filter Include="Objects\Components">
       <UniqueIdentifier>{fb7ecfad-2c39-4db7-9c39-11f3aa0fa841}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Systems">
+      <UniqueIdentifier>{b5037c68-e286-4e5a-b795-b483f2498fb5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -70,15 +73,6 @@
     <ClCompile Include="code\GameObject.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
-    <ClCompile Include="code\GameObjectFactory.cpp">
-      <Filter>Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="code\GameObjectManager.cpp">
-      <Filter>Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="code\GameObjectTypeInfo.cpp">
-      <Filter>Objects</Filter>
-    </ClCompile>
     <ClCompile Include="code\ShaderPass_DX9.cpp">
       <Filter>Foundation\Renderer\Types</Filter>
     </ClCompile>
@@ -93,6 +87,18 @@
     </ClCompile>
     <ClCompile Include="code\VertexDesc.cpp">
       <Filter>Foundation\Renderer\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="code\Object.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="code\GameObjectFactory.cpp">
+      <Filter>Objects\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="code\GameObjectManager.cpp">
+      <Filter>Objects\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="code\GameObjectTypeInfo.cpp">
+      <Filter>Objects\Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -139,15 +145,6 @@
     <ClInclude Include="code\GameObject.h">
       <Filter>Objects</Filter>
     </ClInclude>
-    <ClInclude Include="code\GameObjectFactory.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="code\GameObjectManager.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="code\GameObjectTypeInfo.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
     <ClInclude Include="code\ShaderPass.h">
       <Filter>Foundation\Renderer\Types</Filter>
     </ClInclude>
@@ -164,7 +161,22 @@
       <Filter>Foundation\Renderer\Types</Filter>
     </ClInclude>
     <ClInclude Include="code\BaseComponent.h">
-      <Filter>Component</Filter>
+      <Filter>Objects\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="code\Object.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="code\GameObjectFactory.h">
+      <Filter>Objects\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="code\GameObjectManager.h">
+      <Filter>Objects\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="code\GameObjectTypeInfo.h">
+      <Filter>Objects\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="code\EngineObjectTypes.h">
+      <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

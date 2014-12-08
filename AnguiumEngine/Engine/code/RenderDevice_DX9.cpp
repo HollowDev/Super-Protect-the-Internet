@@ -65,6 +65,7 @@ void RenderDevice::Render( const ShaderPass* _shader, RenderPrimitive* _primitiv
 	D3DPRIMITIVETYPE primType = (D3DPRIMITIVETYPE)_primitive->GetPrimitiveType();
 
 	if( primType == D3DPT_TRIANGLELIST ) numIndices /= 3;
+	if( primType == D3DPT_LINELIST ) numIndices /= 2;
 
 	m_Device->SetVertexDeclaration( decl );
 	m_Device->SetStreamSource( 0, vbuffer, 0, _primitive->GetVertexBuffer()->GetTypeLength() );

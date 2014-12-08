@@ -10,14 +10,6 @@ VertexBuffer::VertexBuffer( void )
 	m_Verts			= nullptr;
 	m_NumVerts		= 0;
 	m_TypeLength	= 0;
-
-	// TODO:: Remove this and make it abstract
-	D3DVERTEXELEMENT9 decl[] =
-	{
-		{ 0, 0,  D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
-		{ 0, 12, D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
-		D3DDECL_END(),
-	};
 }
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 Summary: Destructor

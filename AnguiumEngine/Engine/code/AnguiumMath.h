@@ -37,7 +37,7 @@ namespace AnguiumMath
 	}
 	
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-	Summary: Clamsp the value between the min and max
+	Summary: Clamps the value between the min and max
 	Params:
 		_main - the value to check with
 		_min - the minimum value
@@ -220,14 +220,17 @@ namespace AnguiumMath
 
 	struct Color
 	{
-		struct
+		union
 		{
-			f32 r;
-			f32 g;
-			f32 b;
-			f32 a;
+			struct
+			{
+				f32 r;
+				f32 g;
+				f32 b;
+				f32 a;
+			};
+			f32 c[4];
 		};
-		f32 c[4];
 
 		Color( void ) : r(1.0f), g(1.0f), b(1.0f), a(1.0f) {}
 		Color( f32 _val ) : r(_val), g(_val), b(_val), a(_val) {}

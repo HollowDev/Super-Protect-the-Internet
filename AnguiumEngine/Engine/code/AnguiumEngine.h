@@ -45,6 +45,8 @@ using std::vector;
 
 #include "AnguiumUtil.h"
 #include "AnguiumMath.h"
+#include "EngineObjectTypes.h"
+#include "Object.h"
 #include "GameObject.h"
 #include "GameObjectTypeInfo.h"
 #include "GameObjectFactory.h"

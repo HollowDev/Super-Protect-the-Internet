@@ -159,6 +159,10 @@ LRESULT CALLBACK GameControl::WndProc(
 	case WM_PAINT:
 		{
 			ValidateRect(_hWnd, 0);
+
+			// Call here, so if the message being processed is valid we still update!
+			this->Update();
+			this->Render();
 		}
 		break;
 	}

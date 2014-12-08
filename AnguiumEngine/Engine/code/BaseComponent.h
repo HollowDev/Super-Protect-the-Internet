@@ -5,23 +5,19 @@
 #include <AnguiumEngine.h>
 #include "GameObject.h"
 
-class BaseComponent : public GameObject
+class BaseComponent : public Object
 {
+protected:
+	GameObject* m_Owner;
 
 public:
-	BaseComponent( void ){};
-	~BaseComponent( void ){};
+	virtual ~BaseComponent( void ) = {}
 
-	virtual void OnDock( void );	
-	virtual void OnUnDock( void );
+	virtual void OnDock( void ) = 0;
+	virtual void OnUnDock( void ) = 0;
 
-	inline GameObject* GetOwner( void ) { return m_owner;}
-	inline void SetOwner( GameObject* owner ){m_owner = owner;}
-
-protected:
-
-	GameObject* m_owner;
-
+	inline GameObject* GetOwner( void )			{ return m_Owner;	}
+	inline void SetOwner( GameObject* owner )	{ m_Owner = owner;	}
 };
 
 

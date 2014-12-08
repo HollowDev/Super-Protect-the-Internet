@@ -25,6 +25,6 @@ public:
 	void Update( f32 _timing );
 };
 
-GAME_OBJECT_REGISTER(Projectile, 500)
+GAME_OBJECT_REGISTER(Projectile, 50)
 
 #endif

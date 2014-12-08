@@ -2,29 +2,36 @@
 
 #include "Projectile.h"
 
-Player::Player( void )
+Player::Player( void ) :
+	hasFired(false),
+	fireTimer(0.0f),
+	m_RenderObject(nullptr)
 {
-	m_RenderObject = new RenderObject();
 }
 
 Player::~Player( void )
 {
+	Release();
 }
 
 void Player::Release( void )
 {
-	SAFE_DELETE( m_RenderObject );
 	GameObject::Release();
+	SAFE_DELETE( m_RenderObject );
 }
 
 void Player::Launch( void )
 {
 	GameObject::Launch();
-
+	
+	if( m_RenderObject == nullptr )	m_RenderObject = new RenderObject();
 	m_RenderObject->SetTexID( 0 ); // The id of the last texture loaded... HAXXORS YAY
 	m_RenderObject->SetDrawOrder( 2 );
 
 	g_Renderer->RegisterRenderObject( m_RenderObject );
+
+	hasFired = false;
+	fireTimer = 0.0f;
 }
 
 void Player::Exit( void )
@@ -87,12 +94,11 @@ void Player::Update( f32 _timing )
 		m_Transform.SetRot( 0.0f );
 	}
 
-	static bool hasFired = false;
 	if( GetAsyncKeyState( VK_SPACE ) )
 	{
 		if( !hasFired )
 		{
-			Projectile* bullet = reinterpret_cast<Projectile*>( g_ObjectManager->AddObject( GOT_Projectile ) );
+			Projectile* bullet = reinterpret_cast<Projectile*>( g_ObjectManager->AddObject( OT_Projectile ) );
 			bullet->Shoot( m_Transform.GetPos(), m_Transform.GetDir(), moveSpeed+25.0f, 2.5f );
 			hasFired = true;
 		}
