@@ -7,9 +7,6 @@
 
 class BaseComponent : public Object
 {
-protected:
-	GameObject* m_Owner;
-
 public:
 	virtual ~BaseComponent( void ) = {}
 
@@ -18,6 +15,10 @@ public:
 
 	inline GameObject* GetOwner( void )			{ return m_Owner;	}
 	inline void SetOwner( GameObject* owner )	{ m_Owner = owner;	}
+
+protected:
+	GameObject* m_Owner;
+
 };
 
 
