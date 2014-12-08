@@ -110,6 +110,7 @@
     <ClInclude Include="code\AnguiumEngine.h" />
     <ClInclude Include="code\AnguiumMath.h" />
     <ClInclude Include="code\AnguiumUtil.h" />
+    <ClInclude Include="code\BaseComponent.h" />
     <ClInclude Include="code\GameControl.h" />
     <ClInclude Include="code\GameObject.h" />
     <ClInclude Include="code\GameObjectFactory.h" />

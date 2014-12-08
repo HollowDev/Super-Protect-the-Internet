@@ -22,6 +22,9 @@
     <Filter Include="Foundation\Renderer\Types">
       <UniqueIdentifier>{ec0d281d-a8c1-4b81-9269-091b1535e663}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Component">
+      <UniqueIdentifier>{fb7ecfad-2c39-4db7-9c39-11f3aa0fa841}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="code\AnguiumMath.cpp">
@@ -159,6 +162,9 @@
     </ClInclude>
     <ClInclude Include="code\VertexDesc.h">
       <Filter>Foundation\Renderer\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="code\BaseComponent.h">
+      <Filter>Component</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
