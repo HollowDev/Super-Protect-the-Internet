@@ -11,12 +11,6 @@ Player::Player( void ) :
 
 Player::~Player( void )
 {
-	Release();
-}
-
-void Player::Release( void )
-{
-	GameObject::Release();
 	SAFE_DELETE( m_RenderObject );
 }
 

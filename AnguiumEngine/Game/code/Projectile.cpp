@@ -8,7 +8,7 @@ Projectile::Projectile( void ) :
 }
 Projectile::~Projectile( void )
 {
-	Release();
+	SAFE_DELETE( m_RenderObject );
 }
 
 void Projectile::Shoot( Vector2 _pos, Vector2 _dir, f32 _speed, f32 _life )
@@ -21,12 +21,6 @@ void Projectile::Shoot( Vector2 _pos, Vector2 _dir, f32 _speed, f32 _life )
 
 	m_Speed = _speed;
 	m_Life = _life;
-}
-
-void Projectile::Release( void )
-{
-	SAFE_DELETE( m_RenderObject );
-	GameObject::Release();
 }
 
 void Projectile::Launch( void )

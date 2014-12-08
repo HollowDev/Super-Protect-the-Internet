@@ -22,7 +22,6 @@ namespace AnguiumEngine
 		virtual ~GameObject( void );
 	
 		// Interface
-		virtual void Release( void );
 		virtual void Launch( void );
 		virtual void Exit( void );
 		virtual void Update( f32 _timing );

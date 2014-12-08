@@ -21,7 +21,7 @@ namespace AnguiumEngine
 		~GameObjectManager( void );
 	
 		void Update( f32 _timing );
-	
+
 		GameObject* AddObject( u32 _type );
 		void RemoveObject( u32 _handle, bool _now = false );
 	};
